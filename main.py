@@ -68,6 +68,12 @@ def RecipeParser(siteParser):
     except Exception:
         logging.warning("Failed to parse nutrients")
 
+    try:
+        url = siteParser.url
+        recipeData["url"] = url
+    except Exception:
+        logging.warning("Failed to parse URL")
+
     return recipeData
 
 
