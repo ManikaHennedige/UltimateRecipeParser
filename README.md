@@ -1,7 +1,9 @@
-# UltimateRecipeParser
+# Welcome to the Ultimate Recipe Parser
 
-## This project is adapting and building on the work by the developers responsible for the Python Recipe-Scrapers package
-### You can find a link to their Github Repository here: https://github.com/hhursev/recipe-scrapers
+## Objective
+### We aim to combine several powerful recipe parsing python packages to create the ultimate recipe parser.
 
-## We aim to combine several powerful recipe parsing python packages to create the ultimate recipe parser.
 ## Open source. Because food should be for everyone.
+
+### This project is adapting and building on the work by the developers responsible for the Python Recipe-Scrapers package
+#### You can find a link to their Github Repository here: https://github.com/hhursev/recipe-scrapers
