@@ -111,7 +111,7 @@ def RecipeParser(siteParser):
 
 count = 0
 # get all the recipes from the RecipePathLast (which contains only files with URLs)
-with open("RecipePathList.txt", "r") as f:
+with open("RecipeListPath.txt", "r") as f:
     for recipePath in f.readlines():
         recipePath = recipePath[:-1]
         if os.stat(recipePath).st_size != 0:  # check if empty file
