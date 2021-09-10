@@ -242,6 +242,7 @@ def parseIngredients(ingredientList):
         ingredientString = ingredientString.replace("creme de cacao", "chocolate liquer")
         ingredientString = ingredientString.replace("pepperjack", "Pepper Jack")
         ingredientString = ingredientString.replace("Pepper jack", "Pepper Jack")
+        ingredientString = ingredientString.replace("or more to taste", "")
 
         # standardize ingredient styling
         ingredientString = ingredientString.replace("dressing mix", "dressing")
@@ -262,8 +263,14 @@ def parseIngredients(ingredientList):
         #
 
         ingredientString = ingredientString.replace("-flavored", "")
+
         ingredientString = ingredientString.lower()
-        ingredient["labels"] = getLabelsFromArray(ingredientString.split(" "))
+        splitString = ingredientString.split(" ")
+        if '' in splitString:
+            splitString.remove('')
+
+        ingredient["labels"] = getLabelsFromArray(splitString)
+
 
         if len(ingredient["labels"]) == 0:
             unlabeledIngredients.add(ingredient["ingredient"])

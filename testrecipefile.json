@@ -21,7 +21,7 @@
             ],
             "amount": 1,
             "unit": "",
-            "ingredient": "cucumber or more to taste",
+            "ingredient": "cucumber ",
             "labels": [
                 "vegetable"
             ]
@@ -46,8 +46,8 @@
             "unit": "cups",
             "ingredient": "Cheddar cheese",
             "labels": [
-                "dairy",
-                "cheese"
+                "cheese",
+                "dairy"
             ]
         },
         {
@@ -72,9 +72,9 @@
             "unit": "cups",
             "ingredient": "creamy dressing",
             "labels": [
-                "condiment",
+                "fat and vitamins",
                 "dairy",
-                "fat and vitamins"
+                "condiment"
             ]
         },
         {

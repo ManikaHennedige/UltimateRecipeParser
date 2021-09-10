@@ -13,6 +13,10 @@ with open("RecipeListPath.txt", "w+") as f:
             # if it's not a json file, we're not interested
             if ".json" not in finalPath:
                 continue
+            with open(finalPath[:-1], "r") as g:
+                data = json.load(g)
+                if "allrecipes.com" not in data["url"]:
+                    continue
             # skip the rest of this chunk if the file is empty - the [:-1] is to get rid of the '\n'
             if os.stat(finalPath[:-1]).st_size == 0:
                 continue
