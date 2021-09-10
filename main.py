@@ -1,10 +1,31 @@
 from recipe_scrapers import scrape_me
+from ingredientparser import parseIngredients
 import os
 import json
 import logging
 logging.basicConfig(filename='example.log', level=logging.DEBUG) # set up logging
 
-
+vulgar_to_float = {
+    "\u00BC": 1.0 / 4.0,
+    "\u00BD": 1.0 / 2.0,
+    "\u00BE": 3.0 / 4.0,
+    "\u2150": 1.0 / 7.0,
+    "\u2151": 1.0 / 9.0,
+    "\u2152": 1.0 / 10.0,
+    "\u2153": 1.0 / 3.0,
+    "\u2154": 2.0 / 3.0,
+    "\u2155": 1.0 / 5.0,
+    "\u2156": 2.0 / 5.0,
+    "\u2157": 3.0 / 5.0,
+    "\u2158": 4.0 / 5.0,
+    "\u2159": 1.0 / 6.0,
+    "\u215A": 5.0 / 6.0,
+    "\u215B": 1.0 / 8.0,
+    "\u215C": 3.0 / 8.0,
+    "\u215D": 5.0 / 8.0,
+    "\u215E": 7.0 / 8.0,
+    "\u2189": 0.0 / 3.0,
+}
 # exception friendly parser to attempt to get all attributes from the scraper object
 def RecipeParser(siteParser):
     recipeData = {}
@@ -27,7 +48,18 @@ def RecipeParser(siteParser):
 
     try:
         ingredients = siteParser.ingredients()
-        recipeData["ingredients"] = ingredients
+        # print(ingredients)
+        cleanedIngredients = list()
+
+        for ingredient in ingredients:
+            ingredientWords = list()
+            for word in ingredient.split(" "):
+                if word in vulgar_to_float.keys():
+                    ingredientWords.append(str(vulgar_to_float[word]))
+                else:
+                    ingredientWords.append(word)
+            cleanedIngredients.append(' '.join(ingredientWords))
+        recipeData["ingredients"] = parseIngredients(cleanedIngredients)
     except Exception:
         logging.warning("Failed to parse ingredient list")
 
@@ -87,9 +119,9 @@ with open("RecipePathList.txt", "r") as f:
                 data = json.load(recipeFile)
                 url = data["url"] # get url address from the file
                 count += 1
-            with open(recipePath, "w+") as writingFile:
+            with open("testrecipefile.json", "w+") as writingFile: # change to recipePath to replace the actual file
                 try:
-                    scraper = scrape_me(url) # sometimes, the scraper might not support a website
+                    scraper = scrape_me(url)  # sometimes, the scraper might not support a website
                     recipeContents = RecipeParser(scraper)
                 except Exception:
                     recipeContents = {}
